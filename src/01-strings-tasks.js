@@ -123,7 +123,9 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'A', 5  => 'AAAAA'
  *   'cat', 3 => 'catcatcat'
  */
-function repeatString(/* value, count */) {
+function repeatString(value, count) {
+  return value.repeat(count);
+  // eslint-disable-next-line no-unreachable
   throw new Error('Not implemented');
 }
 
@@ -139,9 +141,12 @@ function repeatString(/* value, count */) {
  *   'I like legends', 'end' => 'I like legs',
  *   'ABABAB','BA' => 'ABAB'
  */
-function removeFirstOccurrences(/* str, value */) {
+function removeFirstOccurrences(str, value) {
+  return str.replace(value, '');
+  // eslint-disable-next-line no-unreachable
   throw new Error('Not implemented');
 }
+
 
 /**
  * Remove the first and last angle brackets from tag string
@@ -154,10 +159,11 @@ function removeFirstOccurrences(/* str, value */) {
  *   '<span>' => 'span'
  *   '<a>' => 'a'
  */
-function unbracketTag(/* str */) {
+function unbracketTag(str) {
+  return str.slice(1, -1);
+  // eslint-disable-next-line no-unreachable
   throw new Error('Not implemented');
 }
-
 
 /**
  * Converts all characters of the specified string into the upper case
@@ -169,7 +175,9 @@ function unbracketTag(/* str */) {
  *   'Thunderstruck' => 'THUNDERSTRUCK'
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
-function convertToUpperCase(/* str */) {
+function convertToUpperCase(str) {
+  return str.toUpperCase();
+  // eslint-disable-next-line no-unreachable
   throw new Error('Not implemented');
 }
 
@@ -188,7 +196,9 @@ function convertToUpperCase(/* str */) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
+function extractEmails(str) {
+  return str.split(';');
+  // eslint-disable-next-line no-unreachable
   throw new Error('Not implemented');
 }
 
@@ -215,7 +225,20 @@ function extractEmails(/* str */) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
+function getRectangleString(width, height) {
+  let result = '';
+  const hor = '-';
+  const ver = '|';
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < height; i++) {
+    if (i === 0 || i === height - 1) {
+      result += `${hor.repeat(width)}\n`;
+    } else {
+      result += `${ver + ' '.repeat(width - 2) + ver}\n`;
+    }
+  }
+  return result;
+  // eslint-disable-next-line no-unreachable
   throw new Error('Not implemented');
 }
 
@@ -236,7 +259,10 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
+function encodeToRot13(str) {
+  // eslint-disable-next-line no-return-assign,no-cond-assign,no-param-reassign
+  return str.replace(/[a-zA-Z]/g, (c) => String.fromCharCode((c <= 'Z' ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26));
+  // eslint-disable-next-line no-unreachable
   throw new Error('Not implemented');
 }
 
@@ -253,10 +279,12 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
+function isString(value) {
+  // eslint-disable-next-line valid-typeof
+  return typeof value === 'string' || value instanceof String;
+  // eslint-disable-next-line no-unreachable
   throw new Error('Not implemented');
 }
-
 
 /**
  * Returns playid card id.
@@ -282,7 +310,13 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
+function getCardId(value) {
+  const deck = ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'];
+  return deck.indexOf(value);
+  // eslint-disable-next-line no-unreachable
   throw new Error('Not implemented');
 }
 
