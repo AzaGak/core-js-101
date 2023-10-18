@@ -18,7 +18,10 @@
  *   'aa',''    => 'aa'
  *   '',  'bb'  => 'bb'
  */
-function concatenateStrings(/* value1, value2 */) {
+function concatenateStrings(value1, value2) {
+  const result = `${value1}${value2}`;
+  return result.trim();
+  // eslint-disable-next-line no-unreachable
   throw new Error('Not implemented');
 }
 
@@ -34,7 +37,9 @@ function concatenateStrings(/* value1, value2 */) {
  *   'b'     => 1
  *   ''      => 0
  */
-function getStringLength(/* value */) {
+function getStringLength(value) {
+  return value.length;
+  // eslint-disable-next-line no-unreachable
   throw new Error('Not implemented');
 }
 
@@ -51,7 +56,9 @@ function getStringLength(/* value */) {
  *   'John','Doe'      => 'Hello, John Doe!'
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(/* firstName, lastName */) {
+function getStringFromTemplate(firstName, lastName) {
+  return `Hello, ${firstName} ${lastName}!`;
+  // eslint-disable-next-line no-unreachable
   throw new Error('Not implemented');
 }
 
@@ -65,7 +72,9 @@ function getStringFromTemplate(/* firstName, lastName */) {
  *   'Hello, John Doe!' => 'John Doe'
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
+function extractNameFromTemplate(value) {
+  return value.slice(7, -1);
+  // eslint-disable-next-line no-unreachable
   throw new Error('Not implemented');
 }
 
@@ -80,7 +89,9 @@ function extractNameFromTemplate(/* value */) {
  *   'John Doe'  => 'J'
  *   'cat'       => 'c'
  */
-function getFirstChar(/* value */) {
+function getFirstChar(value) {
+  return value[0];
+  // eslint-disable-next-line no-unreachable
   throw new Error('Not implemented');
 }
 
@@ -95,7 +106,9 @@ function getFirstChar(/* value */) {
  *   'cat'              => 'cat'
  *   '\tHello, World! ' => 'Hello, World!'
  */
-function removeLeadingAndTrailingWhitespaces(/* value */) {
+function removeLeadingAndTrailingWhitespaces(value) {
+  return value.trim();
+  // eslint-disable-next-line no-unreachable
   throw new Error('Not implemented');
 }
 
