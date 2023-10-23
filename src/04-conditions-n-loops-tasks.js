@@ -315,8 +315,25 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const stack = [];
+  const openingBrackets = '([{<';
+  const closingBrackets = ')]}>';
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const char of str) {
+    if (openingBrackets.includes(char)) {
+      stack.push(char);
+    } else if (closingBrackets.includes(char)) {
+      const lastOpeningBracket = stack.pop();
+      const expectedOpeningBracket = openingBrackets[closingBrackets.indexOf(char)];
+      if (lastOpeningBracket !== expectedOpeningBracket) {
+        return false;
+      }
+    }
+  }
+
+  return stack.length === 0;
 }
 
 
@@ -340,10 +357,9 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
-
 
 /**
  * Returns the common directory path for specified array of full filenames.
@@ -357,8 +373,22 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const slPathes = pathes.map((el) => el.slice(0, el.lastIndexOf('/') + 1));
+  const srPathes = slPathes.sort((a, b) => a.length - b.length);
+  let resultStr = '';
+  for (let j = 0; j < srPathes[0].length; j += 1) {
+    let oChar = srPathes[0][j];
+    for (let i = 1; i < srPathes.length; i += 1) {
+      if (oChar !== srPathes[i][j]) {
+        oChar = '';
+        break;
+      }
+    }
+    if (oChar === '') break;
+    resultStr += oChar;
+  }
+  return resultStr.slice(0, resultStr.lastIndexOf('/') + 1);
 }
 
 
@@ -380,8 +410,24 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const rowsA = m1.length;
+  const colsA = m1[0].length;
+  const colsB = m2[0].length;
+
+  const result = new Array(rowsA);
+
+  for (let i = 0; i < rowsA; i += 1) {
+    result[i] = new Array(colsB);
+    for (let j = 0; j < colsB; j += 1) {
+      result[i][j] = 0;
+      for (let k = 0; k < colsA; k += 1) {
+        result[i][j] += m1[i][k] * m2[k][j];
+      }
+    }
+  }
+
+  return result;
 }
 
 
@@ -415,10 +461,31 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
-}
+function evaluateTicTacToePosition(position) {
+  for (let i = 0; i < 3; i += 1) {
+    if (position[i][0] === position[i][1] && position[i][1] === position[i][2]) {
+      if (position[i][0] !== undefined) {
+        return position[i][0];
+      }
+    }
+    if (position[0][i] === position[1][i] && position[1][i] === position[2][i]) {
+      if (position[0][i] !== undefined) {
+        return position[0][i];
+      }
+    }
+  }
 
+  if (
+    (position[0][0] === position[1][1] && position[1][1] === position[2][2])
+    || (position[0][2] === position[1][1] && position[1][1] === position[2][0])
+  ) {
+    if (position[1][1] !== undefined) {
+      return position[1][1];
+    }
+  }
+
+  return undefined;
+}
 
 module.exports = {
   getFizzBuzz,

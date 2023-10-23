@@ -226,18 +226,10 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-  let result = '';
-  const hor = '-';
-  const ver = '|';
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < height; i++) {
-    if (i === 0 || i === height - 1) {
-      result += `${hor.repeat(width)}\n`;
-    } else {
-      result += `${ver + ' '.repeat(width - 2) + ver}\n`;
-    }
-  }
-  return result;
+  const fRow = `┌${'─'.repeat(width - 2)}┐\n`;
+  const lRow = `└${'─'.repeat(width - 2)}┘\n`;
+  const aver = `│${' '.repeat(width - 2)}│\n`;
+  return fRow + aver.repeat(height - 2) + lRow;
   // eslint-disable-next-line no-unreachable
   throw new Error('Not implemented');
 }
